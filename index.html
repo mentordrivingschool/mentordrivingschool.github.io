@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メントル自動車教習所 — 面談後フォロー資料</title>
+  <style>
+    /* ==============================
+       リセット & カスタムプロパティ
+    ============================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:        #ffffff;
+      --bg:           #f8f7f5;
+      --bg-warm:      #fdf4f1;
+      --navy:         #1a1a2e;
+      --navy-lt:      #2d2d4a;
+      --salmon:       #e8927c;
+      --salmon-lt:    #f0b5a3;
+      --salmon-pale:  #fdf0ec;
+      --salmon-deep:  #d4705a;
+      --gray:         #6b7280;
+      --gray-lt:      #e5e7eb;
+      --gray-xs:      #f3f4f6;
+      --text:         #1a1a2e;
+      --font: 'Helvetica Neue','Hiragino Sans','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+
+    /* ==============================
+       ユーティリティ
+    ============================== */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .container--wide { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .section--dark { background: var(--navy); }
+    .section--salmon { background: var(--salmon-pale); }
+    .section--gray { background: var(--gray-xs); }
+    .section--white { background: var(--white); }
+
+    .label {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--salmon);
+      margin-bottom: 16px;
+    }
+    .label--white { color: var(--salmon-lt); }
+
+    .heading {
+      font-size: clamp(28px, 5vw, 48px); font-weight: 800;
+      line-height: 1.2; color: var(--navy);
+    }
+    .heading--white { color: var(--white); }
+    .heading--center { text-align: center; }
+    .heading .accent { color: var(--salmon); }
+
+    .subtext {
+      font-size: 16px; color: var(--gray); line-height: 1.75;
+      margin-top: 16px;
+    }
+    .subtext--white { color: rgba(255,255,255,0.65); }
+
+    .divider {
+      width: 48px; height: 3px; background: var(--salmon);
+      border-radius: 2px; margin: 24px 0;
+    }
+    .divider--center { margin: 24px auto; }
+
+    /* ==============================
+       スクロールアニメーション
+    ============================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+    .reveal-d5 { transition-delay: 0.5s; }
+    .reveal-d6 { transition-delay: 0.6s; }
+
+    /* ==============================
+       ナビゲーション
+    ============================== */
+    #topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-lt);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 60px;
+      transition: box-shadow 0.3s;
+    }
+    #topnav.scrolled { box-shadow: 0 4px 24px rgba(26,26,46,0.08); }
+    .nav-logo { font-size: 13px; font-weight: 800; letter-spacing: 2px; color: var(--navy); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 13px; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--salmon); }
+    .nav-cta {
+      background: var(--salmon); color: var(--white);
+      font-size: 13px; font-weight: 700; border-radius: 30px;
+      padding: 8px 20px; text-decoration: none; transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--salmon-deep); transform: translateY(-1px); }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      #topnav { padding: 0 20px; }
+    }
+
+    /* ==============================
+       ヒーロー
+    ============================== */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      background: var(--white); padding-top: 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-circle {
+      position: absolute; border-radius: 50%;
+      background: var(--salmon-pale); pointer-events: none;
+    }
+    .hero-bg-circle.c1 { width: 600px; height: 600px; top: -200px; right: -150px; opacity: 0.6; }
+    .hero-bg-circle.c2 { width: 300px; height: 300px; bottom: -100px; left: -80px; opacity: 0.4; }
+
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { display: none; }
+    }
+
+    .hero-eyebrow {
+      font-size: 12px; letter-spacing: 3px; color: var(--salmon);
+      font-weight: 700; margin-bottom: 20px; text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: clamp(36px, 5.5vw, 64px); font-weight: 900;
+      line-height: 1.12; color: var(--navy); margin-bottom: 24px;
+    }
+    .hero-title .line2 { color: var(--salmon); }
+    .hero-desc {
+      font-size: 17px; color: var(--gray); line-height: 1.8;
+      margin-bottom: 36px; max-width: 480px;
+    }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+    .hero-badge {
+      background: var(--gray-xs); border-radius: 30px;
+      padding: 6px 16px; font-size: 13px; color: var(--navy); font-weight: 600;
+    }
+    .hero-badge .icon { margin-right: 6px; }
+    .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--salmon); color: var(--white); font-size: 15px; font-weight: 700;
+      border-radius: 40px; padding: 14px 32px; text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(232,146,124,0.4);
+    }
+    .btn-primary:hover { background: var(--salmon-deep); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(232,146,124,0.5); }
+    .btn-secondary {
+      background: transparent; color: var(--navy); font-size: 15px; font-weight: 700;
+      border-radius: 40px; padding: 14px 32px; text-decoration: none;
+      border: 2px solid var(--gray-lt);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--navy); }
+
+    /* ヒーロービジュアル */
+    .hero-visual { display: flex; justify-content: center; align-items: center; }
+    @media (max-width: 768px) {
+      .hero-visual { display: none; }
+    }
+    .hero-card-stack { position: relative; width: 320px; height: 380px; }
+    .hero-card {
+      position: absolute; border-radius: 20px; padding: 24px;
+      box-shadow: 0 12px 48px rgba(26,26,46,0.14);
+    }
+    .hero-card.card-back {
+      width: 260px; background: var(--navy);
+      top: 20px; right: 0; transform: rotate(6deg);
+      padding: 20px;
+    }
+    .hero-card.card-front {
+      width: 280px; background: var(--white);
+      top: 40px; left: 0;
+    }
+    .hc-label { font-size: 10px; letter-spacing: 2px; font-weight: 700; margin-bottom: 10px; }
+    .hc-back .hc-label { color: var(--salmon-lt); }
+    .hc-front .hc-label { color: var(--salmon); }
+    .hc-num { font-size: 48px; font-weight: 900; line-height: 1; }
+    .hc-back .hc-num { color: var(--white); }
+    .hc-front .hc-num { color: var(--navy); }
+    .hc-unit { font-size: 14px; font-weight: 600; }
+    .hc-back .hc-unit { color: rgba(255,255,255,0.6); }
+    .hc-front .hc-unit { color: var(--gray); }
+    .hc-desc { font-size: 12px; margin-top: 8px; }
+    .hc-back .hc-desc { color: rgba(255,255,255,0.5); }
+    .hc-front .hc-desc { color: var(--gray); }
+    .hc-bar { height: 3px; border-radius: 2px; margin-top: 14px; }
+    .hc-bar-track { background: var(--gray-lt); border-radius: 2px; overflow: hidden; }
+    .hc-bar-fill { background: var(--salmon); height: 3px; border-radius: 2px; }
+
+    /* ==============================
+       「なぜ通学が少ないか」セクション
+    ============================== */
+    .mechanism-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; margin-top: 56px;
+      align-items: start;
+    }
+    @media (max-width: 640px) { .mechanism-grid { grid-template-columns: 1fr; } }
+
+    .mech-col { }
+    .mech-heading { font-size: 15px; font-weight: 700; color: var(--gray); margin-bottom: 16px; letter-spacing: 1px; }
+    .mech-steps { display: flex; flex-direction: column; gap: 12px; }
+    .mech-step {
+      border-radius: 12px; padding: 16px 20px; position: relative;
+    }
+    .mech-step.neutral { background: var(--gray-xs); }
+    .mech-step.highlight { background: var(--salmon); }
+    .mech-step.result { background: var(--navy); }
+    .mech-step .ms-label { font-size: 10px; letter-spacing: 2px; font-weight: 700; margin-bottom: 4px; }
+    .mech-step.neutral .ms-label { color: var(--gray); }
+    .mech-step.highlight .ms-label { color: rgba(255,255,255,0.8); }
+    .mech-step.result .ms-label { color: var(--salmon-lt); }
+    .mech-step .ms-text { font-size: 15px; font-weight: 700; }
+    .mech-step.neutral .ms-text { color: var(--navy); }
+    .mech-step.highlight .ms-text, .mech-step.result .ms-text { color: var(--white); }
+    .mech-step .ms-sub { font-size: 11px; margin-top: 4px; line-height: 1.5; }
+    .mech-step.neutral .ms-sub { color: var(--gray); }
+    .mech-step.highlight .ms-sub, .mech-step.result .ms-sub { color: rgba(255,255,255,0.75); }
+    .mech-arrow { text-align: center; color: var(--salmon); font-size: 18px; padding: 4px 0; }
+
+    /* 2つの理由バナー */
+    .reason-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 40px 0 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .reason-item {
+      background: var(--white);
+      border: 2px solid var(--gray-lt);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      min-width: 180px;
+      flex: 1;
+      max-width: 220px;
+    }
+    .reason-item.reason-result {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .reason-item.reason-result .reason-num { color: var(--salmon-lt); }
+    .reason-item.reason-result .reason-title { color: var(--white); }
+    .reason-item.reason-result .reason-desc { color: rgba(255,255,255,0.65); }
+    .reason-num {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--salmon);
+      margin-bottom: 8px;
+    }
+    .reason-icon { font-size: 28px; margin-bottom: 10px; }
+    .reason-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .reason-desc {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    .reason-plus, .reason-eq {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--salmon);
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) {
+      .reason-banner { gap: 8px; }
+      .reason-item { min-width: 140px; padding: 18px 14px; }
+      .reason-plus, .reason-eq { font-size: 20px; }
+    }
+
+    .mech-note {
+      margin-top: 20px; background: var(--white);
+      border-left: 3px solid var(--salmon); border-radius: 0 10px 10px 0;
+      padding: 14px 18px; font-size: 13px; color: var(--navy);
+      line-height: 1.6; box-shadow: 0 2px 10px rgba(26,26,46,0.06);
+    }
+    .mech-note strong { color: var(--salmon); }
+
+    /* ==============================
+       比較表
+    ============================== */
+    .compare-wrap { margin-top: 56px; overflow: auto; }
+    .compare-table {
+      width: 100%; border-collapse: collapse; border-radius: 16px;
+      overflow: hidden; box-shadow: 0 8px 40px rgba(26,26,46,0.1);
+    }
+    .compare-table th, .compare-table td {
+      padding: 18px 24px; font-size: 14px; text-align: left;
+    }
+    .compare-table thead th { font-size: 12px; letter-spacing: 2px; font-weight: 700; }
+    .compare-table thead th:first-child { background: var(--gray-lt); color: var(--gray); width: 30%; }
+    .compare-table thead th:nth-child(2) { background: var(--gray-xs); color: var(--navy); }
+    .compare-table thead th.col-mentor { background: var(--navy); color: var(--salmon-lt); }
+    .compare-table tbody tr:nth-child(odd) td { background: var(--white); }
+    .compare-table tbody tr:nth-child(even) td { background: #fafafa; }
+    .compare-table tbody td:nth-child(3) { background: var(--salmon-pale) !important; font-weight: 600; }
+    .compare-table tbody td:first-child { font-weight: 600; color: var(--gray); font-size: 12px; letter-spacing: 1px; }
+    .compare-table tbody tr.row-highlight td:first-child { background: var(--navy) !important; color: var(--salmon-lt); font-weight: 700; }
+    .compare-table tbody tr.row-highlight td:nth-child(2) { background: #f3f4f6 !important; color: var(--gray); }
+    .compare-table tbody tr.row-highlight td:nth-child(3) { background: #fff5f0 !important; color: var(--salmon-deep) !important; font-weight: 800; font-size: 15px; }
+    .badge {
+      display: inline-block; background: var(--salmon); color: var(--white);
+      font-size: 11px; font-weight: 700; border-radius: 20px; padding: 2px 10px;
+    }
+
+    /* ==============================
+       取得フロー
+    ============================== */
+    .flow-section { padding: 96px 0; background: var(--white); }
+    .flow-wrap { margin-top: 56px; }
+    .flow-row {
+      display: flex; gap: 0; align-items: flex-start;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .flow-step-wrap { display: flex; align-items: flex-start; }
+    .flow-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 100px; }
+    .flow-circle {
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .flow-circle.std { background: var(--gray-xs); }
+    .flow-circle.exam { background: var(--salmon); }
+    .flow-circle.goal { background: var(--navy); }
+    .flow-label { font-size: 12px; color: var(--gray); text-align: center; line-height: 1.4; max-width: 80px; }
+    .flow-connector {
+      display: flex; align-items: center; padding: 0 8px;
+      color: var(--salmon-lt); font-size: 20px; margin-top: 20px;
+    }
+    .flow-note {
+      margin-top: 36px; background: var(--navy); color: var(--white);
+      border-radius: 14px; padding: 20px 32px; text-align: center;
+      font-size: 15px; font-weight: 600;
+    }
+    .flow-note span { color: var(--salmon-lt); }
+    @media (max-width: 600px) {
+      .flow-row { gap: 0; flex-direction: column; align-items: center; }
+      .flow-connector { transform: rotate(90deg); padding: 4px 0; margin-top: 0; }
+      .flow-step-wrap { flex-direction: column; align-items: center; }
+    }
+
+    /* ==============================
+       特徴
+    ============================== */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px; margin-top: 56px;
+    }
+    .feature-card {
+      background: var(--white); border-radius: 18px; padding: 32px 24px;
+      text-align: center; box-shadow: 0 4px 24px rgba(26,26,46,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(26,26,46,0.12); }
+    .feature-card--primary {
+      background: var(--navy);
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      text-align: left;
+      padding: 32px 40px;
+    }
+    .feature-card--primary .feature-icon { margin-bottom: 0; font-size: 48px; flex-shrink: 0; }
+    .feature-card--primary .feature-num { color: var(--salmon-lt); font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+    .feature-card--primary .feature-title { color: var(--white); font-size: 18px; margin-bottom: 8px; }
+    .feature-card--primary .feature-desc { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 0; }
+    .feature-icon { font-size: 40px; margin-bottom: 14px; }
+    .feature-num { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: var(--salmon); margin-bottom: 6px; }
+    .feature-title { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .feature-desc { font-size: 13px; color: var(--gray); margin-top: 8px; line-height: 1.6; }
+    @media (max-width: 640px) {
+      .feature-card--primary { flex-direction: column; text-align: center; padding: 28px 20px; grid-column: auto; }
+      .feature-card--primary .feature-num { font-size: 22px; }
+    }
+
+    /* ==============================
+       念のための確認
+    ============================== */
+    .fit-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 32px; margin-top: 56px;
+    }
+    @media (max-width: 640px) { .fit-grid { grid-template-columns: 1fr; } }
+    .fit-col { }
+    .fit-col-head {
+      font-size: 16px; font-weight: 800; margin-bottom: 16px;
+      padding-bottom: 12px; border-bottom: 2px solid;
+    }
+    .fit-col-head.yes { color: var(--navy); border-color: var(--salmon); }
+    .fit-col-head.no  { color: var(--navy); border-color: var(--gray-lt); }
+    .fit-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .fit-list li {
+      font-size: 14px; color: var(--text); padding-left: 22px; position: relative; line-height: 1.5;
+    }
+    .fit-list li::before { position: absolute; left: 0; font-size: 14px; }
+    .fit-list.yes li::before { content: '✓'; color: var(--salmon); font-weight: 700; }
+    .fit-list.no  li::before { content: '×'; color: var(--gray); }
+
+    .fit-trust {
+      margin-top: 32px; background: var(--navy); border-radius: 14px;
+      padding: 20px 28px; color: rgba(255,255,255,0.75); font-size: 14px; line-height: 1.7;
+      text-align: center;
+    }
+
+    /* 料金・診断チャートCSS削除（HP誘導に変更）*/
+
+    /* LINE問い合わせ枠 */
+    .price-line-cta {
+      margin-top: 40px;
+    }
+    .price-line-inner {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #f0f9f0;
+      border: 2px solid #06C755;
+      border-radius: 20px;
+      padding: 24px 32px;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .price-line-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+    .price-line-text { flex: 1; }
+    .price-line-ttl {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .price-line-sub {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+    .price-line-btn {
+      flex-shrink: 0;
+      background: #06C755;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 40px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .price-line-btn:hover { opacity: 0.85; transform: translateY(-2px); }
+    @media (max-width: 640px) {
+      .price-line-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 14px;
+      }
+    }
+
+    /* ==============================
+       通っている方の声（Instagramポスト型カード）
+    ============================== */
+    #voices { padding: 96px 0; background: var(--bg); }
+    .voices-intro { text-align: center; margin-bottom: 64px; }
+
+    /* 3カラムグリッド */
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .ig-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .ig-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    /* カード本体 */
+    .ig-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(26,26,46,0.10);
+      transition: transform 0.28s var(--ease-out), box-shadow 0.28s;
+      display: flex;
+      flex-direction: column;
+    }
+    .ig-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 36px rgba(26,26,46,0.15);
+    }
+
+    /* ── カードヘッダー（アカウント行） ── */
+    .ig-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .ig-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .ig-handle {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    .ig-handle-meta {
+      font-size: 10.5px;
+      color: var(--gray);
+    }
+    .ig-logo {
+      margin-left: auto;
+      opacity: 0.25;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* ── 画像エリア ── */
+    .ig-photo {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      background: #f5f5f5;
+    }
+    /* 縦長画像は上部を基準にトリミング */
+    .ig-photo img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.35s var(--ease-out);
+    }
+    .ig-card:hover .ig-photo img { transform: scale(1.04); }
+    /* リール（voice3）は動画 */
+    .ig-photo video {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    /* リールバッジ */
+    .ig-reel-badge {
+      position: absolute;
+      top: 8px; right: 10px;
+      background: rgba(0,0,0,0.52);
+      color: #fff;
+      font-size: 10px; font-weight: 700;
+      border-radius: 20px;
+      padding: 3px 8px;
+      display: flex; align-items: center; gap: 3px;
+      pointer-events: none;
+    }
+    .ig-reel-badge::before { content: '▶'; font-size: 8px; }
+
+    /* ── キャプションエリア ── */
+    .ig-body {
+      padding: 14px 14px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    /* 投稿者名（太字）+ テキスト（インライン） */
+    .ig-caption-text {
+      font-size: 13px;
+      line-height: 1.75;
+      color: #1a1a2e;
+    }
+    .ig-caption-text .ig-name {
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    /* ハッシュタグ */
+    .ig-tags {
+      font-size: 12px;
+      color: #3d7fc1;
+      line-height: 1.6;
+    }
+    /* 投稿リンク */
+    .ig-open-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      color: var(--gray);
+      text-decoration: none;
+      margin-top: 2px;
+      transition: color 0.2s;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 10px;
+    }
+    .ig-open-link:hover { color: var(--salmon); }
+    .ig-open-link::before { content: '📷'; font-size: 12px; }
+    .ig-open-link::after  { content: '→'; font-size: 11px; }
+
+    /* ── Instagram公式埋め込み ── */
+    .ig-embed-wrap {
+      padding: 10px;
+      background: #fff;
+      min-height: 420px;
+    }
+    .ig-embed-wrap .instagram-media {
+      min-width: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+    }
+    .ig-fallback-link {
+      display: block;
+      padding: 10px 14px 14px;
+      color: var(--gray);
+      font-size: 12px;
+      text-align: center;
+      text-decoration: none;
+      border-top: 1px solid #f0f0f0;
+    }
+    .ig-fallback-link:hover { color: var(--salmon); }
+    .ig-summary {
+      padding: 14px 16px 4px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .ig-summary-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.5;
+    }
+    .ig-summary-text {
+      margin-top: 5px;
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--gray);
+    }
+
+    /* ==============================
+       FAQ
+    ============================== */
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(26,26,46,0.05); }
+    .faq-q {
+      padding: 18px 24px; display: flex; align-items: flex-start; gap: 14px;
+      cursor: pointer; user-select: none;
+    }
+    .fq-mark { color: var(--salmon); font-weight: 900; font-size: 18px; flex-shrink: 0; line-height: 1.4; }
+    .fq-text { font-size: 15px; font-weight: 700; color: var(--navy); flex: 1; line-height: 1.5; }
+    .fq-toggle { color: var(--gray); font-size: 16px; flex-shrink: 0; margin-top: 4px; transition: transform 0.3s; }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-a-inner { padding: 0 24px 16px 56px; font-size: 14px; color: var(--gray); line-height: 1.7; }
+    .faq-item.open .fq-toggle { transform: rotate(180deg); }
+    .faq-item.open .faq-a { max-height: 300px; }
+
+    /* ==============================
+       まとめ（フッター前）
+    ============================== */
+    #final { padding: 120px 0; background: var(--navy); text-align: center; }
+    .final-lead { font-size: 14px; letter-spacing: 3px; color: rgba(255,255,255,0.4); margin-bottom: 32px; text-transform: uppercase; }
+    .final-not {
+      font-size: clamp(14px, 2vw, 18px); color: rgba(255,255,255,0.35);
+      margin-bottom: 16px; line-height: 1.5;
+    }
+    .final-yes {
+      font-size: clamp(28px, 5vw, 52px); font-weight: 900; color: var(--white);
+      line-height: 1.25; margin-bottom: 40px;
+    }
+    .final-yes span { color: var(--salmon); }
+    .final-sub { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.8; max-width: 560px; margin: 0 auto 48px; }
+    .final-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-cta-w {
+      padding: 16px 36px; border-radius: 40px; font-size: 15px; font-weight: 700;
+      text-decoration: none; transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-cta-w:hover { transform: translateY(-2px); opacity: 0.9; }
+    .btn-cta-w.primary { background: var(--salmon); color: var(--white); }
+    .btn-cta-w.secondary { background: rgba(255,255,255,0.1); color: var(--white); border: 1px solid rgba(255,255,255,0.25); }
+
+    /* ==============================
+       フッター
+    ============================== */
+    footer {
+      background: #111120; padding: 32px; text-align: center;
+      font-size: 12px; color: rgba(255,255,255,0.3);
+    }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    footer a:hover { color: var(--salmon); }
+
+    /* ==============================
+       スクロールトップ
+    ============================== */
+    #scroll-top {
+      position: fixed; bottom: 28px; right: 28px; z-index: 900;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--navy); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; cursor: pointer;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      box-shadow: 0 4px 16px rgba(26,26,46,0.2);
+      text-decoration: none;
+    }
+    #scroll-top.visible { opacity: 1; pointer-events: auto; }
+
+    /* ==============================
+       セクションの仕切り
+    ============================== */
+    .section-divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gray-lt), transparent);
+    }
+
+    /* ==============================
+       実績ストリップ
+    ============================== */
+    .stats-strip {
+      background: var(--navy);
+      padding: 48px 0;
+    }
+    .stats-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 16px 12px;
+      position: relative;
+    }
+    .stat-item + .stat-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+    .stat-num {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+    .stat-num em {
+      font-style: normal;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--salmon-lt);
+      margin-left: 2px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 8px;
+      line-height: 1.5;
+      letter-spacing: 0.5px;
+    }
+    .stats-cities {
+      margin-top: 32px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .stats-cities-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 1px;
+    }
+    .city-tag {
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+    @media (max-width: 640px) {
+      .stats-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px 0;
+      }
+      .stat-item + .stat-item::before { display: none; }
+      .stat-num { font-size: 32px; }
+    }
+
+    /* ==============================
+       フォロー資料向け追加UI
+    ============================== */
+    .follow-note {
+      background: var(--salmon-pale);
+      border-left: 4px solid var(--salmon);
+      border-radius: 0 16px 16px 0;
+      padding: 18px 22px;
+      margin-bottom: 28px;
+      color: var(--navy);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 40px;
+    }
+    .quick-grid--three { grid-template-columns: repeat(3, 1fr); }
+    .quick-card {
+      background: var(--white);
+      border: 1px solid var(--gray-lt);
+      border-radius: 14px;
+      padding: 20px 18px;
+      box-shadow: 0 4px 20px rgba(26,26,46,0.06);
+    }
+    .quick-label {
+      color: var(--salmon);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+    .quick-title {
+      color: var(--navy);
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+    .quick-text {
+      margin-top: 8px;
+      color: var(--gray);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+    .trust-grid, .price-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 42px;
+    }
+    .trust-card, .price-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px 22px;
+      border: 1px solid var(--gray-lt);
+      box-shadow: 0 4px 24px rgba(26,26,46,0.06);
+    }
+    .trust-card strong, .price-card strong { color: var(--navy); }
+    .trust-card p, .price-card p {
+      color: var(--gray);
+      font-size: 13px;
+      line-height: 1.7;
+      margin-top: 8px;
+    }
+    .price-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--salmon);
+      letter-spacing: 1px;
+    }
+    .price-amount {
+      margin-top: 8px;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+    .price-amount span { font-size: 13px; font-weight: 700; }
+    .price-note {
+      margin-top: 20px;
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: var(--gray-xs);
+      color: var(--gray);
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: left;
+    }
+    .contact-note {
+      margin-top: 22px;
+      display: inline-block;
+      background: #f0f9f0;
+      border: 1px solid #06C755;
+      border-radius: 14px;
+      padding: 14px 20px;
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+    .source-link {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--gray);
+      font-size: 12px;
+    }
+    @media (max-width: 860px) {
+      .quick-grid, .quick-grid--three, .trust-grid, .price-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .quick-grid, .quick-grid--three, .trust-grid, .price-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ナビゲーション -->
+<nav id="topnav">
+  <a class="nav-logo" href="#">MENTOR DRIVING SCHOOL</a>
+  <div class="nav-links">
+    <a href="#trust">安心材料</a>
+    <a href="#compare">比較</a>
+    <a href="#price">料金</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a class="nav-cta" href="#price">料金を確認する</a>
+</nav>
+
+<!-- ==============================
+     ヒーロー
+============================== -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="hero-eyebrow reveal">AFTER MEETING FOLLOW-UP</p>
+        <h1 class="hero-title reveal reveal-d1">
+          ご検討用に、<br>
+          <span class="line2">要点だけ整理しました。</span>
+        </h1>
+        <div class="follow-note reveal reveal-d2">
+          本日はお時間をいただきありがとうございました。<br>
+          面談後に見返しやすいよう、費用・通学回数・取得までの流れを簡潔にまとめています。
+        </div>
+        <p class="hero-desc reveal reveal-d2">
+          メントル自動車教習所は、<strong>学科をオンラインで進め、技能教習に集中して通う</strong>スタイルです。<br>
+          普通自動車免許の取得に向けて、通学回数・費用・進め方を検討しやすいよう、重要な点だけをまとめています。
+        </p>
+        <div class="hero-badges reveal reveal-d3">
+          <span class="hero-badge"><span class="icon">🗓️</span>通学最短8回</span>
+          <span class="hero-badge"><span class="icon">💰</span>税込269,800円〜</span>
+          <span class="hero-badge"><span class="icon">📱</span>学科はオンライン</span>
+          <span class="hero-badge"><span class="icon">🏫</span>5都市に展開</span>
+        </div>
+        <div class="hero-cta-row reveal reveal-d4">
+          <a class="btn-primary" href="#trust">安心材料を確認する</a>
+          <a class="btn-secondary" href="#price">料金を見る</a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal reveal-d2">
+        <div class="hero-card-stack">
+          <div class="hero-card card-back hc-back">
+            <div class="hc-label">一般的な教習所</div>
+            <div class="hc-num">40<span style="font-size:24px">回</span></div>
+            <div class="hc-unit">前後の通学</div>
+            <div class="hc-desc">学科と技能の両方で通う従来型</div>
+            <div class="hc-bar-track" style="margin-top:14px"><div class="hc-bar-fill" style="width:100%"></div></div>
+          </div>
+          <div class="hero-card card-front hc-front">
+            <div class="hc-label">MENTOR</div>
+            <div class="hc-num">8<span style="font-size:24px">〜10回</span></div>
+            <div class="hc-unit">の通学で取得を目指せる</div>
+            <div class="hc-desc">学科オンライン＋技能教習に集中</div>
+            <div class="hc-bar-track" style="margin-top:14px"><div class="hc-bar-fill" style="width:25%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+</section>
+
+<!-- ==============================
+     実績ストリップ
+============================== -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-num">5<em>都市</em></div>
+      <div class="stat-label">渋谷・埼玉・横浜<br>名古屋・大阪に展開</div>
+    </div>
+    <div class="stat-item reveal reveal-d1">
+      <div class="stat-num">26.9<em>万円〜</em></div>
+      <div class="stat-label">普通コース<br>税込269,800円</div>
+    </div>
+    <div class="stat-item reveal reveal-d2">
+      <div class="stat-num">8<em>〜10回</em></div>
+      <div class="stat-label">通学回数の目安<br>学科はオンライン</div>
+    </div>
+    <div class="stat-item reveal reveal-d3">
+      <div class="stat-num">相談<em>可</em></div>
+      <div class="stat-label">不明点は各校舎の<br>担当者へ確認</div>
+    </div>
+  </div>
+  <div class="stats-cities">
+    <span class="stats-cities-label">展開エリア</span>
+    <span class="city-tag">📍 渋谷</span>
+    <span class="city-tag">📍 埼玉</span>
+    <span class="city-tag">📍 横浜</span>
+    <span class="city-tag">📍 名古屋</span>
+    <span class="city-tag">📍 大阪</span>
+  </div>
+</div>
+
+<!-- ==============================
+     安心材料と仕組み
+============================== -->
+<section id="trust" class="section section--white">
+  <div class="container">
+    <p class="label reveal">確認ポイント</p>
+    <h2 class="heading reveal reveal-d1">検討時に気になる点を、<span class="accent">先に整理します。</span></h2>
+    <div class="divider reveal reveal-d2"></div>
+    <p class="subtext reveal reveal-d2">
+      「本当に免許が取れるのか」「普通の教習所と何が違うのか」「費用はどのくらいか」を、短時間で確認できるように整理しています。
+    </p>
+
+    <div class="trust-grid">
+      <div class="trust-card reveal reveal-d1">
+        <strong>取得するのは普通自動車免許</strong>
+        <p>普通自動車免許は道路交通法に基づく国家資格です。学科・技能・試験という取得プロセスに沿って進めます。</p>
+      </div>
+      <div class="trust-card reveal reveal-d2">
+        <strong>5都市に展開</strong>
+        <p>渋谷・埼玉・横浜・名古屋・大阪に展開。学科はオンライン、技能は教習所で行います。</p>
+      </div>
+      <div class="trust-card reveal reveal-d3">
+        <strong>違いは「通い方」</strong>
+        <p>教習内容を省くのではなく、学科をオンライン化し、通学を技能中心にすることで負担を抑えます。</p>
+      </div>
+    </div>
+
+    <div style="margin-top:64px">
+      <p class="label reveal">通学回数が少ない理由</p>
+      <h3 class="heading reveal reveal-d1" style="font-size:clamp(24px,4vw,38px)">ポイントは、<span class="accent">学科オンライン化</span>と技能教習の進め方です。</h3>
+      <div class="divider reveal reveal-d2"></div>
+    </div>
+
+    <!-- 2つの理由バナー -->
+    <div class="reason-banner reveal reveal-d2">
+      <div class="reason-item">
+        <div class="reason-num">理由①</div>
+        <div class="reason-icon">📱</div>
+        <div class="reason-title">学科教習の<br>オンライン化</div>
+        <div class="reason-desc">27時間の学科をスマホで受講。<br>通学ゼロで消化できる。</div>
+      </div>
+      <div class="reason-plus">＋</div>
+      <div class="reason-item">
+        <div class="reason-num">理由②</div>
+        <div class="reason-icon">🚗</div>
+        <div class="reason-title">技能教習を<br>まとめて進めやすい</div>
+        <div class="reason-desc">学科通学を減らし、<br>技能の日に集中しやすい。</div>
+      </div>
+      <div class="reason-eq">＝</div>
+      <div class="reason-item reason-result">
+        <div class="reason-num">結果</div>
+        <div class="reason-icon">🎉</div>
+        <div class="reason-title">通学回数<br>最短8〜10回</div>
+        <div class="reason-desc">一般的な教習所の<br>約40回から大幅削減。</div>
+      </div>
+    </div>
+
+    <div class="mechanism-grid">
+      <div class="reveal reveal-d2">
+        <p class="mech-heading">一般的な教習所</p>
+        <div class="mech-steps">
+          <div class="mech-step neutral">
+            <p class="ms-label">学科教習</p>
+            <p class="ms-text">教習所の教室で受講（固定時間割）</p>
+          </div>
+          <div class="mech-arrow">＋</div>
+          <div class="mech-step neutral">
+            <p class="ms-label">技能教習</p>
+            <p class="ms-text">教習所で受講（車の運転練習）</p>
+          </div>
+          <div class="mech-arrow">＝</div>
+          <div class="mech-step result">
+            <p class="ms-label">合計通学回数</p>
+            <p class="ms-text">約40回前後</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d3">
+        <p class="mech-heading">メントル自動車教習所</p>
+        <div class="mech-steps">
+          <div class="mech-step highlight">
+            <p class="ms-label">学科教習 → オンライン化</p>
+            <p class="ms-text">スマホでいつでも受講可能</p>
+          </div>
+          <div class="mech-arrow">＋</div>
+          <div class="mech-step neutral">
+            <p class="ms-label">技能教習</p>
+            <p class="ms-text">まとまった時間で進めやすい</p>
+            <p class="ms-sub">（予約枠・コース・地域により異なります）</p>
+          </div>
+          <div class="mech-arrow">＝</div>
+          <div class="mech-step result" style="background:var(--salmon)">
+            <p class="ms-label">合計通学回数</p>
+            <p class="ms-text">最短 8〜10回</p>
+          </div>
+        </div>
+        <div class="mech-note">
+          💡 <strong>教習内容を省略しているのではありません。</strong><br>
+          ①学科27時間をオンラインで消化することで教習所への学科通学がゼロに。②1日にまとまった時間で技能教習を進めることで、通学1回あたりの密度が上がり、必要な通学回数が大幅に減ります。この2つの組み合わせが「最短8〜10回」を実現しています。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     普通の教習所との違い
+============================== -->
+<section id="compare" class="section section--gray">
+  <div class="container">
+    <p class="label reveal">比較で理解する</p>
+    <h2 class="heading reveal reveal-d1">普通の教習所・合宿免許との<span class="accent">違い</span></h2>
+    <div class="divider reveal reveal-d2"></div>
+    <p class="subtext reveal reveal-d2">
+      一言でいうと、<strong>合宿ほど生活を止めず、一般的な通学より通う回数を抑えやすい</strong>選択肢です。
+    </p>
+
+    <div class="quick-grid quick-grid--three">
+      <div class="quick-card reveal reveal-d1">
+        <p class="quick-label">一般的な教習所</p>
+        <p class="quick-title">学科も技能も通う</p>
+        <p class="quick-text">通学回数が多くなりやすく、固定時間割に生活を合わせる必要があります。</p>
+      </div>
+      <div class="quick-card reveal reveal-d2">
+        <p class="quick-label">合宿免許</p>
+        <p class="quick-title">短期集中だが生活を止める</p>
+        <p class="quick-text">まとまった休みが必要で、仕事・学校・家庭の予定と合わせづらい場合があります。</p>
+      </div>
+      <div class="quick-card reveal reveal-d3">
+        <p class="quick-label">メントル</p>
+        <p class="quick-title">学科オンライン＋技能中心に通学</p>
+        <p class="quick-text">日常生活を続けながら、通学回数を抑えて免許取得を目指します。</p>
+      </div>
+    </div>
+
+    <div class="compare-wrap reveal reveal-d2">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>一般的な教習所</th>
+            <th class="col-mentor">メントル</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-highlight">
+            <td><strong>通学回数</strong></td>
+            <td>約40回前後</td>
+            <td><span class="badge">最短8〜10回</span></td>
+          </tr>
+          <tr class="row-highlight">
+            <td><strong>1日の技能教習</strong></td>
+            <td style="font-size:13px; color:#6b7280">短時間ずつ進めることが多い</td>
+            <td><span class="badge">技能中心に通学</span><br><small style="color:#6b7280">予約枠・コースに応じて調整</small></td>
+          </tr>
+          <tr>
+            <td>学科教習</td>
+            <td>教習所で受講（固定の時間割）</td>
+            <td><span class="badge">オンライン</span> いつでも受講</td>
+          </tr>
+          <tr>
+            <td>予約・連絡</td>
+            <td>窓口・電話</td>
+            <td><span class="badge">LINE完結</span></td>
+          </tr>
+          <tr>
+            <td>スケジュール</td>
+            <td>教習所の時間割に合わせる</td>
+            <td>自分のペースで調整可能</td>
+          </tr>
+          <tr>
+            <td>取得する免許</td>
+            <td>普通自動車免許</td>
+            <td>普通自動車免許</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     取得フロー
+============================== -->
+<section class="flow-section">
+  <div class="container">
+    <p class="label reveal">安心して進める</p>
+    <h2 class="heading reveal reveal-d1">本当に免許は<span class="accent">取得できるのか？</span></h2>
+    <div class="divider reveal reveal-d2"></div>
+    <p class="subtext reveal reveal-d2">学科・技能・試験、各ステップの流れを確認しておきましょう。</p>
+
+    <div class="flow-wrap reveal reveal-d3">
+      <div class="flow-row">
+        <div class="flow-step-wrap">
+          <div class="flow-item">
+            <div class="flow-circle std">📝</div>
+            <div class="flow-label">入校</div>
+          </div>
+          <div class="flow-connector">→</div>
+        </div>
+        <div class="flow-step-wrap">
+          <div class="flow-item">
+            <div class="flow-circle std">📱</div>
+            <div class="flow-label">オンライン学科</div>
+          </div>
+          <div class="flow-connector">→</div>
+        </div>
+        <div class="flow-step-wrap">
+          <div class="flow-item">
+            <div class="flow-circle exam">📄</div>
+            <div class="flow-label">仮免学科試験</div>
+          </div>
+          <div class="flow-connector">→</div>
+        </div>
+        <div class="flow-step-wrap">
+          <div class="flow-item">
+            <div class="flow-circle std">🚗</div>
+            <div class="flow-label">仮免技能教習</div>
+          </div>
+          <div class="flow-connector">→</div>
+        </div>
+        <div class="flow-step-wrap">
+          <div class="flow-item">
+            <div class="flow-circle exam">📄</div>
+            <div class="flow-label">仮免技能試験</div>
+          </div>
+          <div class="flow-connector">→</div>
+        </div>
+        <div class="flow-step-wrap">
+          <div class="flow-item">
+            <div class="flow-circle exam">📄</div>
+            <div class="flow-label">本免学科試験</div>
+          </div>
+          <div class="flow-connector">→</div>
+        </div>
+        <div class="flow-step-wrap">
+          <div class="flow-item">
+            <div class="flow-circle std">🚗</div>
+            <div class="flow-label">本免技能教習</div>
+          </div>
+          <div class="flow-connector">→</div>
+        </div>
+        <div class="flow-step-wrap">
+          <div class="flow-item">
+            <div class="flow-circle exam">📄</div>
+            <div class="flow-label">本免技能試験</div>
+          </div>
+          <div class="flow-connector">→</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-circle goal">🎉</div>
+          <div class="flow-label">免許取得</div>
+        </div>
+      </div>
+      <div class="flow-note">
+        学科・技能・試験の各ステップは、道路交通法に基づく国家資格の取得プロセスです。<br>
+        メントルが変えたのは「学科をどこで・いつ受けるか」という受講スタイルの部分です。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     念のための確認
+============================== -->
+<section class="section section--white">
+  <div class="container">
+    <p class="label reveal">念のための確認</p>
+    <h2 class="heading reveal reveal-d1">面談後に確認しておきたい<span class="accent">相性のポイント</span></h2>
+    <div class="divider reveal reveal-d2"></div>
+    <p class="subtext reveal reveal-d2">
+      すでに担当者から説明を受けた方向けの補足です。不安が残る場合は、申し込み前に担当者へ確認しておくと安心です。
+    </p>
+
+    <div class="fit-grid">
+      <div class="reveal reveal-d2">
+        <div class="fit-col-head yes">✓ 特に進めやすい方</div>
+        <ul class="fit-list yes">
+          <li>社会人・仕事しながら取得したい方</li>
+          <li>大学生・授業の合間に進めたい方</li>
+          <li>シフト勤務で不規則な生活の方</li>
+          <li>短期間で効率よく進めたい方</li>
+          <li>「時間がない」が理由で諦めていた方</li>
+        </ul>
+      </div>
+      <div class="reveal reveal-d3">
+        <div class="fit-col-head no">△ 事前に相談しておくと安心な方</div>
+        <ul class="fit-list no">
+          <li>オンライン学科の進め方に不安がある方</li>
+          <li>希望時期や通える曜日がかなり限られている方</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fit-trust reveal reveal-d4">
+      迷うポイントがある場合は、費用・時期・エリア・進め方を担当者へまとめてお問い合わせくださいませ。
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     通っている方の声（Instagram）
+============================== -->
+<section id="voices">
+  <div class="container--wide">
+    <div class="voices-intro">
+      <p class="label reveal">リアルな声</p>
+      <h2 class="heading heading--center reveal reveal-d1">通っている方の<span class="accent">声</span></h2>
+      <div class="divider divider--center reveal reveal-d2"></div>
+      <p class="subtext reveal reveal-d2" style="text-align:center">
+        実際に利用している方がSNSに投稿してくださった内容をご紹介します。
+      </p>
+    </div>
+
+    <!-- ===== Instagramポスト型カードグリッド ===== -->
+    <div class="ig-grid">
+
+      <!-- ① _yua.1020さん（2026年3月19日投稿） -->
+      <article class="ig-card reveal">
+        <div class="ig-embed-wrap">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWEEardCVVb/" data-instgrm-version="14">
+            <a href="https://www.instagram.com/p/DWEEardCVVb/" target="_blank" rel="noopener">Instagram投稿を表示</a>
+          </blockquote>
+        </div>
+        <div class="ig-summary">
+          <p class="ig-summary-title">すき間時間に学科を進められる安心感</p>
+          <p class="ig-summary-text">移動中やカフェでもオンライン学科を進められる便利さを紹介されています。</p>
+        </div>
+        <a class="ig-fallback-link" href="https://www.instagram.com/p/DWEEardCVVb/" target="_blank" rel="noopener">Instagramで開く</a>
+      </article>
+
+      <!-- ② dj_seikaさん（2025年9月30日投稿） -->
+      <article class="ig-card reveal reveal-d1">
+        <div class="ig-embed-wrap">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DPYhmNWkkBU/" data-instgrm-version="14">
+            <a href="https://www.instagram.com/p/DPYhmNWkkBU/" target="_blank" rel="noopener">Instagram投稿を表示</a>
+          </blockquote>
+        </div>
+        <div class="ig-summary">
+          <p class="ig-summary-title">仕事と両立しながら前向きに進行</p>
+          <p class="ig-summary-text">オンライン学科とLINE予約の便利さで、忙しい中でも進めやすい点を評価されています。</p>
+        </div>
+        <a class="ig-fallback-link" href="https://www.instagram.com/p/DPYhmNWkkBU/" target="_blank" rel="noopener">Instagramで開く</a>
+      </article>
+
+      <!-- ③ misaki_beauty_さん（2025年8月12日リール投稿） -->
+      <article class="ig-card reveal reveal-d2">
+        <div class="ig-embed-wrap">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DNQVx-oBu89/" data-instgrm-version="14">
+            <a href="https://www.instagram.com/reel/DNQVx-oBu89/" target="_blank" rel="noopener">Instagramリールを表示</a>
+          </blockquote>
+        </div>
+        <div class="ig-summary">
+          <p class="ig-summary-title">大人になってからの挑戦を応援</p>
+          <p class="ig-summary-text">オンライン学科やサポートを活用し、免許取得に前向きに取り組む様子が伝わります。</p>
+        </div>
+        <a class="ig-fallback-link" href="https://www.instagram.com/reel/DNQVx-oBu89/" target="_blank" rel="noopener">Instagramで開く</a>
+      </article>
+
+      <!-- ④ mkmkdxさん（2025年1月17日投稿） -->
+      <article class="ig-card reveal reveal-d1">
+        <div class="ig-embed-wrap">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DE63tFRyfAU/" data-instgrm-version="14">
+            <a href="https://www.instagram.com/p/DE63tFRyfAU/" target="_blank" rel="noopener">Instagram投稿を表示</a>
+          </blockquote>
+        </div>
+        <div class="ig-summary">
+          <p class="ig-summary-title">自分のペースで最後までやりきった声</p>
+          <p class="ig-summary-text">忙しい時期を挟みながらも、通いやすさを活かして免許取得まで進めた体験談です。</p>
+        </div>
+        <a class="ig-fallback-link" href="https://www.instagram.com/p/DE63tFRyfAU/" target="_blank" rel="noopener">Instagramで開く</a>
+      </article>
+
+    </div><!-- /.ig-grid -->
+
+  </div>
+</section>
+
+<!-- ==============================
+     料金
+============================== -->
+<section id="price" class="section section--white">
+  <div class="container" style="text-align:center">
+    <p class="label reveal">費用の目安</p>
+    <h2 class="heading heading--center reveal reveal-d1">料金は<span class="accent">税込269,800円〜</span>です。</h2>
+    <div class="divider divider--center reveal reveal-d2"></div>
+    <p class="subtext reveal reveal-d2" style="text-align:center">
+      公式サイトに掲載されている主なコース料金を、比較しやすいようにまとめています。
+    </p>
+
+    <div class="price-grid reveal reveal-d3">
+      <div class="price-card">
+        <p class="price-name">普通コース</p>
+        <div class="price-amount">269,800<span>円(税込)</span></div>
+        <p>まず費用を抑えて始めたい方向けの基本コースです。</p>
+      </div>
+      <div class="price-card">
+        <p class="price-name">安心コース</p>
+        <div class="price-amount">299,800<span>円(税込)</span></div>
+        <p>追加教習の不安も含めて、少し余裕を持って進めたい方向けです。</p>
+      </div>
+      <div class="price-card">
+        <p class="price-name">安心Plusコース</p>
+        <div class="price-amount">329,800<span>円(税込)</span></div>
+        <p>予約面・追加教習面をより手厚くしたい方向けのコースです。</p>
+      </div>
+    </div>
+
+    <a class="source-link" href="https://mentordrivingschool.co.jp/plan/" target="_blank" rel="noopener">公式料金ページも確認できます</a>
+
+  </div>
+</section>
+
+<!-- ==============================
+     FAQ
+============================== -->
+<section id="faq" class="section section--white">
+  <div class="container">
+    <p class="label reveal">疑問を解消する</p>
+    <h2 class="heading reveal reveal-d1">よくある<span class="accent">質問</span></h2>
+    <div class="divider reveal reveal-d2"></div>
+
+    <div class="faq-list reveal reveal-d3">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span class="fq-mark">Q</span>
+          <span class="fq-text">本当に免許は取得できますか？</span>
+          <span class="fq-toggle">▾</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">普通自動車免許は道路交通法に基づく国家資格です。学科・技能・試験の検定項目はどの教習所を選んでも共通で、メントルもその枠組みの中で運営されています。学科をオンラインで受講し、技能は教習所に通うというスタイルが特徴です。</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span class="fq-mark">Q</span>
+          <span class="fq-text">学科はオンラインだけですか？技能はどこで受けますか？</span>
+          <span class="fq-toggle">▾</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">学科教習（27時間）はすべてオンライン（録画講義）で受講します。技能教習は教習所で対面で行います。通学が必要なのは技能教習の日のみです。</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span class="fq-mark">Q</span>
+          <span class="fq-text">試験はどこで受けますか？</span>
+          <span class="fq-toggle">▾</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">全て運転免許センター（免許試験場）で受験します。試験の検定項目は国家資格として全国共通です。</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span class="fq-mark">Q</span>
+          <span class="fq-text">追加料金はかかりますか？</span>
+          <span class="fq-toggle">▾</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">コースや進捗によって異なります。追加教習が発生した場合の費用や、試験手数料（仮免・本免）は別途必要です。詳細なコース内容・料金は公式サイトをご確認ください。</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span class="fq-mark">Q</span>
+          <span class="fq-text">合宿免許との違いは何ですか？</span>
+          <span class="fq-toggle">▾</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">合宿免許は短期集中（2週間程度）で宿泊を伴います。メントルは日常生活を続けながら取得できるスタイルです。仕事・学校との両立が可能で、宿泊費も不要です。</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span class="fq-mark">Q</span>
+          <span class="fq-text">社会人でも取得できますか？</span>
+          <span class="fq-toggle">▾</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">社会人の方に特に向いているサービスです。学科は早朝・深夜でも受講でき、技能教習の予約も柔軟に相談できます。仕事のシフトや残業によっては調整が必要な場合もありますが、実際に社会人の方が多数利用されています。</div></div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">
+          <span class="fq-mark">Q</span>
+          <span class="fq-text">普通の教習所と取得する免許に違いはありますか？</span>
+          <span class="fq-toggle">▾</span>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">普通自動車免許です。以前は教室に予約して学科を受けるスタイルが一般的でしたが、メントルはその部分をオンライン動画に置き換えることで、通学の手間を大きく減らしています。試験・検定の基準は国家資格として全国共通です。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================
+     まとめ
+============================== -->
+<section id="final">
+  <div class="container">
+    <p class="final-lead reveal">確認したいことがある場合</p>
+    <p class="final-not reveal reveal-d1">費用・時期・通える場所は、校舎や状況によって確認が必要です。</p>
+    <h2 class="final-yes reveal reveal-d2">
+      気になる点は、<br><span>担当者へお問い合わせ</span><br>くださいませ。
+    </h2>
+    <p class="final-sub reveal reveal-d3">
+      各校舎ごとに公式LINEがございます。ご案内を受けた校舎・担当者の窓口から、費用・時期・エリアなどをご確認ください。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>本資料はメントル自動車教習所の比較検討用資料です。</p>
+  <p style="margin-top:8px">
+    <a href="https://mentordrivingschool.co.jp/" target="_blank">公式サイト</a> ／
+    受付時間：10時〜22時（お申し込みは毎日対応）
+  </p>
+</footer>
+
+<a id="scroll-top" href="#" title="トップへ戻る">↑</a>
+
+<script>
+  /* ====== スクロール検知 ====== */
+  const nav = document.getElementById('topnav');
+  const scrollTop = document.getElementById('scroll-top');
+
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    scrollTop.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  /* ====== スクロールアニメーション ====== */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  /* ====== FAQ ====== */
+  function toggleFaq(el) { el.classList.toggle('open'); }
+
+  /* ====== スムーズスクロール (ハッシュリンク) ====== */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 68;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+<script async src="https://www.instagram.com/embed.js"></script>
+</body>
+</html>
