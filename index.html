@@ -123,8 +123,8 @@
        ヒーロー
     ============================== */
     #hero {
-      min-height: 100vh; display: flex; align-items: center;
-      background: var(--white); padding-top: 60px;
+      min-height: auto; display: flex; align-items: center;
+      background: var(--white); padding: 120px 0 72px;
       position: relative; overflow: hidden;
     }
     .hero-bg-circle {
@@ -135,8 +135,9 @@
     .hero-bg-circle.c2 { width: 300px; height: 300px; bottom: -100px; left: -80px; opacity: 0.4; }
 
     .hero-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+      display: grid; grid-template-columns: minmax(0, 760px); gap: 32px;
       align-items: center; position: relative; z-index: 1;
+      justify-content: center; text-align: center;
     }
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -154,7 +155,7 @@
     .hero-title .line2 { color: var(--salmon); }
     .hero-desc {
       font-size: 17px; color: var(--gray); line-height: 1.8;
-      margin-bottom: 36px; max-width: 480px;
+      margin: 0 auto 28px; max-width: 620px;
     }
     .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
     .hero-badge {
@@ -162,7 +163,7 @@
       padding: 6px 16px; font-size: 13px; color: var(--navy); font-weight: 600;
     }
     .hero-badge .icon { margin-right: 6px; }
-    .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
     .btn-primary {
       background: var(--salmon); color: var(--white); font-size: 15px; font-weight: 700;
       border-radius: 40px; padding: 14px 32px; text-decoration: none;
@@ -323,15 +324,17 @@
     }
     .compare-table thead th { font-size: 12px; letter-spacing: 2px; font-weight: 700; }
     .compare-table thead th:first-child { background: var(--gray-lt); color: var(--gray); width: 30%; }
-    .compare-table thead th:nth-child(2) { background: var(--gray-xs); color: var(--navy); }
+    .compare-table thead th:nth-child(2),
+    .compare-table thead th:nth-child(3) { background: var(--gray-xs); color: var(--navy); }
     .compare-table thead th.col-mentor { background: var(--navy); color: var(--salmon-lt); }
     .compare-table tbody tr:nth-child(odd) td { background: var(--white); }
     .compare-table tbody tr:nth-child(even) td { background: #fafafa; }
-    .compare-table tbody td:nth-child(3) { background: var(--salmon-pale) !important; font-weight: 600; }
+    .compare-table tbody td:nth-child(4) { background: var(--salmon-pale) !important; font-weight: 600; }
     .compare-table tbody td:first-child { font-weight: 600; color: var(--gray); font-size: 12px; letter-spacing: 1px; }
     .compare-table tbody tr.row-highlight td:first-child { background: var(--navy) !important; color: var(--salmon-lt); font-weight: 700; }
-    .compare-table tbody tr.row-highlight td:nth-child(2) { background: #f3f4f6 !important; color: var(--gray); }
-    .compare-table tbody tr.row-highlight td:nth-child(3) { background: #fff5f0 !important; color: var(--salmon-deep) !important; font-weight: 800; font-size: 15px; }
+    .compare-table tbody tr.row-highlight td:nth-child(2),
+    .compare-table tbody tr.row-highlight td:nth-child(3) { background: #f3f4f6 !important; color: var(--gray); }
+    .compare-table tbody tr.row-highlight td:nth-child(4) { background: #fff5f0 !important; color: var(--salmon-deep) !important; font-weight: 800; font-size: 15px; }
     .badge {
       display: inline-block; background: var(--salmon); color: var(--white);
       font-size: 11px; font-weight: 700; border-radius: 20px; padding: 2px 10px;
@@ -341,13 +344,17 @@
        取得フロー
     ============================== */
     .flow-section { padding: 96px 0; background: var(--white); }
-    .flow-wrap { margin-top: 56px; }
+    .flow-wrap { margin-top: 42px; }
     .flow-row {
-      display: flex; gap: 0; align-items: flex-start;
-      flex-wrap: wrap; justify-content: center;
+      display: grid; grid-template-columns: repeat(4, minmax(140px, 1fr));
+      gap: 12px; align-items: stretch;
     }
-    .flow-step-wrap { display: flex; align-items: flex-start; }
-    .flow-item { display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 100px; }
+    .flow-step-wrap { display: flex; align-items: stretch; min-width: 0; }
+    .flow-item {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; min-width: 0; width: 100%;
+      background: var(--gray-xs); border-radius: 14px; padding: 18px 12px;
+    }
     .flow-circle {
       width: 60px; height: 60px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
@@ -357,10 +364,7 @@
     .flow-circle.exam { background: var(--salmon); }
     .flow-circle.goal { background: var(--navy); }
     .flow-label { font-size: 12px; color: var(--gray); text-align: center; line-height: 1.4; max-width: 80px; }
-    .flow-connector {
-      display: flex; align-items: center; padding: 0 8px;
-      color: var(--salmon-lt); font-size: 20px; margin-top: 20px;
-    }
+    .flow-connector { display: none; }
     .flow-note {
       margin-top: 36px; background: var(--navy); color: var(--white);
       border-radius: 14px; padding: 20px 32px; text-align: center;
@@ -368,9 +372,7 @@
     }
     .flow-note span { color: var(--salmon-lt); }
     @media (max-width: 600px) {
-      .flow-row { gap: 0; flex-direction: column; align-items: center; }
-      .flow-connector { transform: rotate(90deg); padding: 4px 0; margin-top: 0; }
-      .flow-step-wrap { flex-direction: column; align-items: center; }
+      .flow-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     /* ==============================
@@ -962,7 +964,6 @@
     <a href="#price">料金</a>
     <a href="#faq">FAQ</a>
   </div>
-  <a class="nav-cta" href="#price">料金を確認する</a>
 </nav>
 
 <!-- ==============================
@@ -985,36 +986,11 @@
           メントル自動車教習所は、<strong>学科をオンラインで進め、技能教習に集中して通う</strong>スタイルです。<br>
           普通自動車免許の取得に向けて、通学回数・費用・進め方を検討しやすいよう、重要な点だけをまとめています。
         </p>
-        <div class="hero-badges reveal reveal-d3">
-          <span class="hero-badge"><span class="icon">🗓️</span>通学最短8回</span>
-          <span class="hero-badge"><span class="icon">💰</span>税込269,800円〜</span>
-          <span class="hero-badge"><span class="icon">📱</span>学科はオンライン</span>
-          <span class="hero-badge"><span class="icon">🏫</span>5都市に展開</span>
-        </div>
         <div class="hero-cta-row reveal reveal-d4">
-          <a class="btn-primary" href="#trust">安心材料を確認する</a>
-          <a class="btn-secondary" href="#price">料金を見る</a>
+          <a class="btn-primary" href="#final">担当者のLINEへ相談する</a>
         </div>
       </div>
 
-      <div class="hero-visual reveal reveal-d2">
-        <div class="hero-card-stack">
-          <div class="hero-card card-back hc-back">
-            <div class="hc-label">一般的な教習所</div>
-            <div class="hc-num">40<span style="font-size:24px">回</span></div>
-            <div class="hc-unit">前後の通学</div>
-            <div class="hc-desc">学科と技能の両方で通う従来型</div>
-            <div class="hc-bar-track" style="margin-top:14px"><div class="hc-bar-fill" style="width:100%"></div></div>
-          </div>
-          <div class="hero-card card-front hc-front">
-            <div class="hc-label">MENTOR</div>
-            <div class="hc-num">8<span style="font-size:24px">〜10回</span></div>
-            <div class="hc-unit">の通学で取得を目指せる</div>
-            <div class="hc-desc">学科オンライン＋技能教習に集中</div>
-            <div class="hc-bar-track" style="margin-top:14px"><div class="hc-bar-fill" style="width:25%"></div></div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <div class="hero-bg-circle c1"></div>
@@ -1027,20 +1003,20 @@
 <div class="stats-strip">
   <div class="stats-inner">
     <div class="stat-item reveal">
-      <div class="stat-num">5<em>都市</em></div>
-      <div class="stat-label">渋谷・埼玉・横浜<br>名古屋・大阪に展開</div>
+      <div class="stat-num">8<em>〜10回</em></div>
+      <div class="stat-label">通学回数の目安<br>技能日は3〜5時間運転</div>
     </div>
     <div class="stat-item reveal reveal-d1">
       <div class="stat-num">26.9<em>万円〜</em></div>
       <div class="stat-label">普通コース<br>税込269,800円</div>
     </div>
     <div class="stat-item reveal reveal-d2">
-      <div class="stat-num">8<em>〜10回</em></div>
-      <div class="stat-label">通学回数の目安<br>学科はオンライン</div>
+      <div class="stat-num">学科<em>オンライン</em></div>
+      <div class="stat-label">27時間の学科を<br>スマホで受講</div>
     </div>
     <div class="stat-item reveal reveal-d3">
-      <div class="stat-num">相談<em>可</em></div>
-      <div class="stat-label">不明点は各校舎の<br>担当者へ確認</div>
+      <div class="stat-num">5<em>都市</em></div>
+      <div class="stat-label">渋谷・埼玉・横浜<br>名古屋・大阪に展開</div>
     </div>
   </div>
   <div class="stats-cities">
@@ -1110,51 +1086,9 @@
       </div>
     </div>
 
-    <div class="mechanism-grid">
-      <div class="reveal reveal-d2">
-        <p class="mech-heading">一般的な教習所</p>
-        <div class="mech-steps">
-          <div class="mech-step neutral">
-            <p class="ms-label">学科教習</p>
-            <p class="ms-text">教習所の教室で受講（固定時間割）</p>
-          </div>
-          <div class="mech-arrow">＋</div>
-          <div class="mech-step neutral">
-            <p class="ms-label">技能教習</p>
-            <p class="ms-text">教習所で受講（車の運転練習）</p>
-          </div>
-          <div class="mech-arrow">＝</div>
-          <div class="mech-step result">
-            <p class="ms-label">合計通学回数</p>
-            <p class="ms-text">約40回前後</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="reveal reveal-d3">
-        <p class="mech-heading">メントル自動車教習所</p>
-        <div class="mech-steps">
-          <div class="mech-step highlight">
-            <p class="ms-label">学科教習 → オンライン化</p>
-            <p class="ms-text">スマホでいつでも受講可能</p>
-          </div>
-          <div class="mech-arrow">＋</div>
-          <div class="mech-step neutral">
-            <p class="ms-label">技能教習</p>
-            <p class="ms-text">1日に3〜5時間を目安に運転しやすい</p>
-            <p class="ms-sub">（予約枠・コース・地域により異なります）</p>
-          </div>
-          <div class="mech-arrow">＝</div>
-          <div class="mech-step result" style="background:var(--salmon)">
-            <p class="ms-label">合計通学回数</p>
-            <p class="ms-text">最短 8〜10回</p>
-          </div>
-        </div>
-        <div class="mech-note">
-          💡 <strong>教習内容を省略しているのではありません。</strong><br>
-          ①学科27時間をオンラインで消化することで教習所への学科通学がゼロに。②技能教習の日は1日に3〜5時間を目安に長く運転できるため、通学1回あたりの密度が上がり、必要な通学回数が大幅に減ります。この2つの組み合わせが「最短8〜10回」を実現しています。
-        </div>
-      </div>
+    <div class="mech-note reveal reveal-d3">
+      💡 <strong>教習内容を省略しているのではありません。</strong><br>
+      学科27時間をオンラインで進め、技能教習の日は3〜5時間を目安に長く運転できるため、通学1回あたりの密度を高めやすい仕組みです。
     </div>
   </div>
 </section>
@@ -1171,30 +1105,13 @@
       一言でいうと、<strong>合宿ほど生活を止めず、一般的な通学より通う回数を抑えやすい</strong>選択肢です。
     </p>
 
-    <div class="quick-grid quick-grid--three">
-      <div class="quick-card reveal reveal-d1">
-        <p class="quick-label">一般的な教習所</p>
-        <p class="quick-title">学科も技能も通う</p>
-        <p class="quick-text">通学回数が多くなりやすく、固定時間割に生活を合わせる必要があります。</p>
-      </div>
-      <div class="quick-card reveal reveal-d2">
-        <p class="quick-label">合宿免許</p>
-        <p class="quick-title">短期集中だが生活を止める</p>
-        <p class="quick-text">まとまった休みが必要で、仕事・学校・家庭の予定と合わせづらい場合があります。</p>
-      </div>
-      <div class="quick-card reveal reveal-d3">
-        <p class="quick-label">メントル</p>
-        <p class="quick-title">学科オンライン＋技能中心に通学</p>
-        <p class="quick-text">日常生活を続けながら、通学回数を抑えて免許取得を目指します。</p>
-      </div>
-    </div>
-
     <div class="compare-wrap reveal reveal-d2">
       <table class="compare-table">
         <thead>
           <tr>
             <th></th>
             <th>一般的な教習所</th>
+            <th>合宿免許</th>
             <th class="col-mentor">メントル</th>
           </tr>
         </thead>
@@ -1202,30 +1119,36 @@
           <tr class="row-highlight">
             <td><strong>通学回数</strong></td>
             <td>約40回前後</td>
+            <td>約2週間の短期集中</td>
             <td><span class="badge">最短8〜10回</span></td>
           </tr>
           <tr class="row-highlight">
             <td><strong>1日の技能教習</strong></td>
             <td style="font-size:13px; color:#6b7280">短時間ずつ進めることが多い</td>
+            <td style="font-size:13px; color:#6b7280">合宿スケジュールに沿って進行</td>
             <td><span class="badge">3〜5時間を目安に運転</span><br><small style="color:#6b7280">予約枠・コースに応じて調整</small></td>
           </tr>
           <tr>
             <td>学科教習</td>
             <td>教習所で受講（固定の時間割）</td>
+            <td>現地で受講</td>
             <td><span class="badge">オンライン</span> いつでも受講</td>
           </tr>
           <tr>
             <td>予約・連絡</td>
             <td>窓口・電話</td>
+            <td>合宿先の案内に沿う</td>
             <td><span class="badge">LINE完結</span></td>
           </tr>
           <tr>
             <td>スケジュール</td>
             <td>教習所の時間割に合わせる</td>
+            <td>まとまった休みが必要</td>
             <td>自分のペースで調整可能</td>
           </tr>
           <tr>
             <td>取得する免許</td>
+            <td>普通自動車免許</td>
             <td>普通自動車免許</td>
             <td>普通自動車免許</td>
           </tr>
@@ -1243,17 +1166,10 @@
     <p class="label reveal">安心して進める</p>
     <h2 class="heading reveal reveal-d1">本当に免許は<span class="accent">取得できるのか？</span></h2>
     <div class="divider reveal reveal-d2"></div>
-    <p class="subtext reveal reveal-d2">学科・技能・試験、各ステップの流れを確認しておきましょう。</p>
+    <p class="subtext reveal reveal-d2">大きな流れだけ確認できれば十分です。細かな日程は担当者と調整します。</p>
 
     <div class="flow-wrap reveal reveal-d3">
       <div class="flow-row">
-        <div class="flow-step-wrap">
-          <div class="flow-item">
-            <div class="flow-circle std">📝</div>
-            <div class="flow-label">入校</div>
-          </div>
-          <div class="flow-connector">→</div>
-        </div>
         <div class="flow-step-wrap">
           <div class="flow-item">
             <div class="flow-circle std">📱</div>
@@ -1263,43 +1179,15 @@
         </div>
         <div class="flow-step-wrap">
           <div class="flow-item">
-            <div class="flow-circle exam">📄</div>
-            <div class="flow-label">仮免学科試験</div>
-          </div>
-          <div class="flow-connector">→</div>
-        </div>
-        <div class="flow-step-wrap">
-          <div class="flow-item">
             <div class="flow-circle std">🚗</div>
-            <div class="flow-label">仮免技能教習</div>
+            <div class="flow-label">技能教習</div>
           </div>
           <div class="flow-connector">→</div>
         </div>
         <div class="flow-step-wrap">
           <div class="flow-item">
             <div class="flow-circle exam">📄</div>
-            <div class="flow-label">仮免技能試験</div>
-          </div>
-          <div class="flow-connector">→</div>
-        </div>
-        <div class="flow-step-wrap">
-          <div class="flow-item">
-            <div class="flow-circle exam">📄</div>
-            <div class="flow-label">本免学科試験</div>
-          </div>
-          <div class="flow-connector">→</div>
-        </div>
-        <div class="flow-step-wrap">
-          <div class="flow-item">
-            <div class="flow-circle std">🚗</div>
-            <div class="flow-label">本免技能教習</div>
-          </div>
-          <div class="flow-connector">→</div>
-        </div>
-        <div class="flow-step-wrap">
-          <div class="flow-item">
-            <div class="flow-circle exam">📄</div>
-            <div class="flow-label">本免技能試験</div>
+            <div class="flow-label">試験</div>
           </div>
           <div class="flow-connector">→</div>
         </div>
@@ -1312,44 +1200,6 @@
         学科・技能・試験の各ステップは、道路交通法に基づく国家資格の取得プロセスです。<br>
         メントルが変えたのは「学科をどこで・いつ受けるか」という受講スタイルの部分です。
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==============================
-     念のための確認
-============================== -->
-<section class="section section--white">
-  <div class="container">
-    <p class="label reveal">念のための確認</p>
-    <h2 class="heading reveal reveal-d1">面談後に確認しておきたい<span class="accent">相性のポイント</span></h2>
-    <div class="divider reveal reveal-d2"></div>
-    <p class="subtext reveal reveal-d2">
-      すでに担当者から説明を受けた方向けの補足です。不安が残る場合は、申し込み前に担当者へ確認しておくと安心です。
-    </p>
-
-    <div class="fit-grid">
-      <div class="reveal reveal-d2">
-        <div class="fit-col-head yes">✓ 特に進めやすい方</div>
-        <ul class="fit-list yes">
-          <li>社会人・仕事しながら取得したい方</li>
-          <li>大学生・授業の合間に進めたい方</li>
-          <li>シフト勤務で不規則な生活の方</li>
-          <li>短期間で効率よく進めたい方</li>
-          <li>「時間がない」が理由で諦めていた方</li>
-        </ul>
-      </div>
-      <div class="reveal reveal-d3">
-        <div class="fit-col-head no">△ 事前に相談しておくと安心な方</div>
-        <ul class="fit-list no">
-          <li>オンライン学科の進め方に不安がある方</li>
-          <li>希望時期や通える曜日がかなり限られている方</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="fit-trust reveal reveal-d4">
-      迷うポイントがある場合は、費用・時期・エリア・進め方を担当者へまとめてお問い合わせくださいませ。
     </div>
   </div>
 </section>
@@ -1411,20 +1261,6 @@
           <p class="ig-summary-text">オンライン学科やサポートを活用し、免許取得に前向きに取り組む様子が伝わります。</p>
         </div>
         <a class="ig-fallback-link" href="https://www.instagram.com/reel/DNQVx-oBu89/" target="_blank" rel="noopener">Instagramで開く</a>
-      </article>
-
-      <!-- ④ mkmkdxさん（2025年1月17日投稿） -->
-      <article class="ig-card reveal reveal-d1">
-        <div class="ig-embed-wrap">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DE63tFRyfAU/" data-instgrm-version="14">
-            <a href="https://www.instagram.com/p/DE63tFRyfAU/" target="_blank" rel="noopener">Instagram投稿を表示</a>
-          </blockquote>
-        </div>
-        <div class="ig-summary">
-          <p class="ig-summary-title">自分のペースで最後までやりきった声</p>
-          <p class="ig-summary-text">忙しい時期を挟みながらも、通いやすさを活かして免許取得まで進めた体験談です。</p>
-        </div>
-        <a class="ig-fallback-link" href="https://www.instagram.com/p/DE63tFRyfAU/" target="_blank" rel="noopener">Instagramで開く</a>
       </article>
 
     </div><!-- /.ig-grid -->
@@ -1542,6 +1378,9 @@
     <p class="final-sub reveal reveal-d3">
       各校舎ごとに公式LINEがございます。ご案内を受けた校舎・担当者の窓口から、費用・時期・エリアなどをご確認ください。
     </p>
+    <div class="final-cta reveal reveal-d4">
+      <a class="btn-cta-w primary" href="#final">担当者のLINEへ相談する</a>
+    </div>
   </div>
 </section>
 
